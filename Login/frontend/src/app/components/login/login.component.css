@@ -1,0 +1,28 @@
+/* Estilos para errores (Coherencia con Registro) */
+.error-text {
+    color: #ef4444;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+    display: block;
+    font-weight: 500;
+    text-align: left;
+    /* Alineado a la izquierda para que quede bajo el input */
+    animation: fadeIn 0.3s ease-out;
+}
+
+.input-error {
+    border-color: #ef4444 !important;
+    background-color: #fef2f2;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

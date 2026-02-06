@@ -1,0 +1,53 @@
+### Base URL variable to avoid redundancy
+@url = http://localhost:3500/api/auth
+
+##############################################
+### 1. USER REGISTRATION
+##############################################
+POST {{url}}/register
+Content-Type: application/json
+
+{
+    "username": "prueba-final",
+    "email": "prueba-final@gmail.com",
+    "password": "prueba-final",
+    "role": "user"
+}
+
+###
+
+##############################################
+### 2. USER LOGIN (Issue access key here)
+##############################################
+POST {{url}}/login
+Content-Type: application/json
+
+{
+    "email": "prueba-final@gmail.com",
+    "password": "prueba-final"
+}
+
+###
+
+##############################################
+### 3. PROFILE TEST (Protected VIP Zone)
+##############################################
+GET {{url}}/perfil
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEzLCJyb2xlIjoidXNlciIsImlhdCI6MTc2ODkxMjMwMCwiZXhwIjoxNzY4OTE5NTAwfQ.hMq4LSbSNG5o4jPZUbck_KVYOc7LlpKBm7TqMAVTi20
+
+##############################################
+### 4. DELETE MY OWN ACCOUNT
+##############################################
+DELETE http://localhost:3500/api/auth/delete
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoidXNlciIsImlhdCI6MTc2ODkxMDY2NSwiZXhwIjoxNzY4OTE3ODY1fQ.2c7RyltBT3vXkusVvAsFoRchfGr45rLW1EMZwQ1MDQU
+
+##############################################
+### 5. UPDATE PROFILE (Name change only)
+##############################################
+PUT http://localhost:3500/api/auth/update
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEzLCJyb2xlIjoidXNlciIsImlhdCI6MTc2ODkxMjMwMCwiZXhwIjoxNzY4OTE5NTAwfQ.hMq4LSbSNG5o4jPZUbck_KVYOc7LlpKBm7TqMAVTi20
+Content-Type: application/json
+
+{
+    "username": "super-prueba"
+}

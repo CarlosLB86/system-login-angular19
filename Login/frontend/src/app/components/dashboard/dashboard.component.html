@@ -1,0 +1,96 @@
+<div class="min-h-screen bg-[#0f172a] flex items-center justify-center p-4">
+    @if (user()) {
+    <div
+        class="max-w-4xl w-full bg-slate-800/40 backdrop-blur-xl rounded-[2rem] border border-slate-700/50 shadow-2xl p-8 md:p-12">
+
+        <header class="mb-10 text-center md:text-left">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-2">
+                {{ welcomeMessage() }}
+            </h1>
+            <p class="text-slate-400 font-medium">General Dashboard • 2026 System</p>
+        </header>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-10">
+            <div class="bg-slate-900/40 rounded-3xl p-6 border border-slate-700/30">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="text-3xl bg-blue-600/20 p-3 rounded-2xl">👤</div>
+                    <h3 class="text-xl font-bold text-white">Profile data</h3>
+                </div>
+
+                @if (!isEditing()) {
+                <div class="space-y-4 animate-fadeIn">
+                    <p class="text-slate-300">User: <strong class="text-white">{{ user()?.username }}</strong></p>
+                    <p class="text-slate-300">Email: <strong class="text-white">{{ user()?.email }}</strong></p>
+                    <p class="text-slate-300">Role: <span
+                            class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-xs font-bold border border-blue-500/30">{{
+                            user()?.role }}</span></p>
+                </div>
+                } @else {
+                <form [formGroup]="profileForm" (ngSubmit)="guardarCambios()" class="space-y-4 animate-slideIn">
+                    <div>
+                        <label class="text-xs font-bold text-slate-500 uppercase ml-1">Name</label>
+                        <input formControlName="username"
+                            class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-white focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-slate-500 uppercase ml-1">Email</label>
+                        <input formControlName="email"
+                            class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-white focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div class="flex gap-2 pt-2">
+                        <button type="submit" [disabled]="isLoading()"
+                            class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-bold transition-all">
+                            {{ isLoading() ? 'Saving...' : 'Confirm' }}
+                        </button>
+                        <button type="button" (click)="editProfile()"
+                            class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg text-sm font-bold transition-all">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+                }
+            </div>
+
+            <div class="bg-slate-900/40 rounded-3xl p-6 border border-slate-700/30">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="text-3xl bg-green-600/20 p-3 rounded-2xl">🛡️</div>
+                    <h3 class="text-xl font-bold text-white">Security</h3>
+                </div>
+                <div class="space-y-4">
+                    <p class="flex items-center gap-2 text-slate-300">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        Status: <span class="text-green-400 font-bold">Verified</span>
+                    </p>
+                    <p class="text-xs text-slate-500 bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+                        Access protected via <strong>JWT Session</strong>. Your connection is encrypted end-to-end.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-700/50">
+            <div class="flex gap-4">
+                <button (click)="editProfile()" [disabled]="isEditing()"
+                    class="px-6 py-3 bg-white/5 hover:bg-white/10 text-white font-bold rounded-2xl transition-all border border-white/10 active:scale-95 disabled:opacity-0">
+                    Edit Profile
+                </button>
+                <button (click)="salir()"
+                    class="px-6 py-3 bg-red-500/10 hover:bg-red-500/20 text-red-400 font-bold rounded-2xl transition-all border border-red-500/20 active:scale-95">
+                    Logout
+                </button>
+            </div>
+
+            <button (click)="eliminarCuenta()"
+                class="text-slate-500 hover:text-red-400 text-sm font-medium transition-colors">
+                Delete account permanently
+            </button>
+        </div>
+    </div>
+    } @else {
+    <div class="text-center">
+        <div class="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4">
+        </div>
+        <p class="text-slate-400 font-medium animate-pulse">Synchronizing with the server...</p>
+    </div>
+    }
+</div>

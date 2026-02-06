@@ -1,0 +1,35 @@
+/* ... Todo tu código anterior se queda igual, añade esto al final ... */
+
+/* Estilo para el texto de error */
+.error-text {
+    color: #ef4444;
+    /* Rojo vibrante */
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+    display: block;
+    font-weight: 500;
+}
+
+/* Clase que se aplica al input cuando está mal */
+.input-error {
+    border-color: #ef4444 !important;
+    background-color: #fef2f2;
+    /* Un fondo rojizo muy sutil */
+}
+
+/* Animación opcional para que el mensaje aparezca suavemente */
+.error-text {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
